@@ -1,0 +1,12 @@
+{
+  "name": "VanilaJS",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "compile-styles": "sass ./styles.scss ./styles.css --watch"
+  },
+  "dependencies": {
+    "sass": "^1.34.0"
+  }
+}

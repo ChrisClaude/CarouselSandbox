@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Vanilla JS Carousel</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="grid-layout">
+        <section>
+          <h1>Carousel with Opacity Animation</h1>
+          <div class="slideshow-container">
+            <div class="slides fade">
+              <div class="numbertext">1 / 5</div>
+              <img
+                src="https://cdn.pixabay.com/photo/2020/07/24/21/58/lemon-5435158_1280.jpg"
+                alt=""
+              />
+              <div class="text">Caption Text</div>
+            </div>
+
+            <div class="slides fade">
+              <div class="numbertext">2 / 5</div>
+              <img
+                src="https://cdn.pixabay.com/photo/2020/06/21/09/46/rainbow-5324147_1280.jpg"
+                alt=""
+              />
+              <div class="text">Caption Text</div>
+            </div>
+
+            <div class="slides fade">
+              <div class="numbertext">3 / 5</div>
+              <img
+                src="https://cdn.pixabay.com/photo/2020/04/23/16/45/eagle-5083248_1280.jpg"
+                alt=""
+              />
+              <div class="text">Caption Text</div>
+            </div>
+
+            <div class="slides fade">
+              <div class="numbertext">4 / 5</div>
+              <img
+                src="https://cdn.pixabay.com/photo/2014/02/27/16/10/tree-276014_1280.jpg"
+                alt=""
+              />
+              <div class="text">Caption Text</div>
+            </div>
+
+            <div class="slides fade">
+              <div class="numbertext">5 / 5</div>
+              <img
+                src="https://cdn.pixabay.com/photo/2021/05/18/10/22/sheep-6262928_960_720.jpg"
+                alt=""
+              />
+              <div class="text">Caption Text</div>
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+          </div>
+          <br />
+
+          <div class="dot-box">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+          </div>
+        </section>
+
+        <section>
+          <h1>Carousel with Swipping Animation</h1>
+          <div class="slideshow-container relative">
+            <div class="slides-chain">
+              <div class="slides-2">
+                <div class="numbertext">1 / 5</div>
+                <img
+                  src="https://cdn.pixabay.com/photo/2020/07/24/21/58/lemon-5435158_1280.jpg"
+                  alt=""
+                />
+                <div class="text">Caption Text</div>
+              </div>
+
+              <div class="slides-2">
+                <div class="numbertext">2 / 5</div>
+                <img
+                  src="https://cdn.pixabay.com/photo/2020/06/21/09/46/rainbow-5324147_1280.jpg"
+                  alt=""
+                />
+                <div class="text">Caption Text</div>
+              </div>
+
+              <div class="slides-2">
+                <div class="numbertext">3 / 5</div>
+                <img
+                  src="https://cdn.pixabay.com/photo/2020/04/23/16/45/eagle-5083248_1280.jpg"
+                  alt=""
+                />
+                <div class="text">Caption Text</div>
+              </div>
+
+              <div class="slides-2">
+                <div class="numbertext">4 / 5</div>
+                <img
+                  src="https://cdn.pixabay.com/photo/2014/02/27/16/10/tree-276014_1280.jpg"
+                  alt=""
+                />
+                <div class="text">Caption Text</div>
+              </div>
+
+              <div class="slides-2">
+                <div class="numbertext">5 / 5</div>
+                <img
+                  src="https://cdn.pixabay.com/photo/2021/05/18/10/22/sheep-6262928_960_720.jpg"
+                  alt=""
+                />
+                <div class="text">Caption Text</div>
+              </div>
+            </div>
+
+            <a class="prev" onclick="moveslide(-1)">&#10094;</a>
+            <a class="next" onclick="moveslide(1)">&#10095;</a>
+          </div>
+          <br />
+
+          <div class="dot-box">
+            <span class="dot-2" onclick="selectSlide(1)"></span>
+            <span class="dot-2" onclick="selectSlide(2)"></span>
+            <span class="dot-2" onclick="selectSlide(3)"></span>
+            <span class="dot-2" onclick="selectSlide(4)"></span>
+            <span class="dot-2" onclick="selectSlide(5)"></span>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="./index.js"></script>
+  </body>
+</html>
