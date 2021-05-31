@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Infinite Carousel</title>
+  </head>
+  <body>
+    <div class="infinite-container">
+      <h1>Circular Carousel</h1>
+
+      <div class="infinite-carousel">
+        <div class="infinite-slide">
+          <div class="slides-2">
+            <div class="numbertext">1 / 5</div>
+            <img
+              src="https://cdn.pixabay.com/photo/2020/07/24/21/58/lemon-5435158_1280.jpg"
+              alt=""
+            />
+            <div class="text">Caption Text</div>
+          </div>
+
+          <div class="slides-2">
+            <div class="numbertext">2 / 5</div>
+            <img
+              src="https://cdn.pixabay.com/photo/2020/06/21/09/46/rainbow-5324147_1280.jpg"
+              alt=""
+            />
+            <div class="text">Caption Text</div>
+          </div>
+
+          <div class="slides-2">
+            <div class="numbertext">3 / 5</div>
+            <img
+              src="https://cdn.pixabay.com/photo/2020/04/23/16/45/eagle-5083248_1280.jpg"
+              alt=""
+            />
+            <div class="text">Caption Text</div>
+          </div>
+
+          <div class="slides-2">
+            <div class="numbertext">4 / 5</div>
+            <img
+              src="https://cdn.pixabay.com/photo/2014/02/27/16/10/tree-276014_1280.jpg"
+              alt=""
+            />
+            <div class="text">Caption Text</div>
+          </div>
+
+          <div class="slides-2">
+            <div class="numbertext">5 / 5</div>
+            <img
+              src="https://cdn.pixabay.com/photo/2021/05/18/10/22/sheep-6262928_960_720.jpg"
+              alt=""
+            />
+            <div class="text">Caption Text</div>
+          </div>
+        </div>
+
+        <a class="prev">&#10094;</a>
+        <a class="next">&#10095;</a>
+      </div>
+    </div>
+
+    <script>
+      showSlide();
+
+      function showSlide() {
+        let currentSlide = 1;
+        let direction = -1;
+        const infiniteSldie = document.querySelector('.infinite-slide');
+        const nextBtn = document.querySelector('.next');
+        const prevBtn = document.querySelector('.prev');
+        const MAX_SLIDE_NUM = document.querySelectorAll('.slides-2').length;
+        const MIN_SLIDE_NUM = 1;
+
+        // initial carousel set up
+        infiniteSldie.prepend(infiniteSldie.lastElementChild);
+        infiniteSldie.style.transform = 'translate(-500px)';
+        setTimeout(function () {
+          infiniteSldie.style.transition = 'transform 0.5s ease';
+        });
+
+        // Next and Prev button slinners
+        nextBtn.addEventListener('click', function () {
+          currentSlide =
+            currentSlide === MAX_SLIDE_NUM ? MIN_SLIDE_NUM : currentSlide + 1;
+          direction = -1;
+          infiniteSldie.style.transform = 'translate(-1000px)';
+
+          console.log(currentSlide);
+        });
+
+        prevBtn.addEventListener('click', function () {
+          currentSlide =
+            currentSlide === MIN_SLIDE_NUM ? MAX_SLIDE_NUM : currentSlide - 1;
+          direction = 1;
+          infiniteSldie.style.transform = 'translate(0)';
+
+          console.log(currentSlide);
+        });
+
+        infiniteSldie.addEventListener('transitionend', function () {
+          if (direction === -1) {
+            infiniteSldie.append(infiniteSldie.firstElementChild);
+          } else {
+            infiniteSldie.prepend(infiniteSldie.lastElementChild);
+          }
+
+          // we set the transition to none because the following transform should not transition
+          infiniteSldie.style.transition = 'none';
+          infiniteSldie.style.transform = 'translate(-500px)';
+
+          // we reset the transition
+          setTimeout(() => {
+            infiniteSldie.style.transition = 'transform 0.9s ease';
+          });
+        });
+
+        setInterval(function () {
+          currentSlide =
+            currentSlide === MAX_SLIDE_NUM ? MIN_SLIDE_NUM : currentSlide + 1;
+          direction = -1;
+          infiniteSldie.style.transform = 'translate(-1000px)';
+
+          console.log(currentSlide);
+        }, 4000);
+      }
+    </script>
+  </body>
+</html>

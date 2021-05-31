@@ -73,65 +73,67 @@
 
         <section>
           <h1>Carousel with Swipping Animation</h1>
-          <div class="slideshow-container relative">
-            <div class="slides-chain">
-              <div class="slides-2">
-                <div class="numbertext">1 / 5</div>
-                <img
-                  src="https://cdn.pixabay.com/photo/2020/07/24/21/58/lemon-5435158_1280.jpg"
-                  alt=""
-                />
-                <div class="text">Caption Text</div>
-              </div>
+          <div class="slideshow-container">
+            <div class="carousel relative">
+              <div class="slides-chain">
+                <div class="slides-2">
+                  <div class="numbertext">1 / 5</div>
+                  <img
+                    src="https://cdn.pixabay.com/photo/2020/07/24/21/58/lemon-5435158_1280.jpg"
+                    alt=""
+                  />
+                  <div class="text">Caption Text</div>
+                </div>
 
-              <div class="slides-2">
-                <div class="numbertext">2 / 5</div>
-                <img
-                  src="https://cdn.pixabay.com/photo/2020/06/21/09/46/rainbow-5324147_1280.jpg"
-                  alt=""
-                />
-                <div class="text">Caption Text</div>
-              </div>
+                <div class="slides-2">
+                  <div class="numbertext">2 / 5</div>
+                  <img
+                    src="https://cdn.pixabay.com/photo/2020/06/21/09/46/rainbow-5324147_1280.jpg"
+                    alt=""
+                  />
+                  <div class="text">Caption Text</div>
+                </div>
 
-              <div class="slides-2">
-                <div class="numbertext">3 / 5</div>
-                <img
-                  src="https://cdn.pixabay.com/photo/2020/04/23/16/45/eagle-5083248_1280.jpg"
-                  alt=""
-                />
-                <div class="text">Caption Text</div>
-              </div>
+                <div class="slides-2">
+                  <div class="numbertext">3 / 5</div>
+                  <img
+                    src="https://cdn.pixabay.com/photo/2020/04/23/16/45/eagle-5083248_1280.jpg"
+                    alt=""
+                  />
+                  <div class="text">Caption Text</div>
+                </div>
 
-              <div class="slides-2">
-                <div class="numbertext">4 / 5</div>
-                <img
-                  src="https://cdn.pixabay.com/photo/2014/02/27/16/10/tree-276014_1280.jpg"
-                  alt=""
-                />
-                <div class="text">Caption Text</div>
-              </div>
+                <div class="slides-2">
+                  <div class="numbertext">4 / 5</div>
+                  <img
+                    src="https://cdn.pixabay.com/photo/2014/02/27/16/10/tree-276014_1280.jpg"
+                    alt=""
+                  />
+                  <div class="text">Caption Text</div>
+                </div>
 
-              <div class="slides-2">
-                <div class="numbertext">5 / 5</div>
-                <img
-                  src="https://cdn.pixabay.com/photo/2021/05/18/10/22/sheep-6262928_960_720.jpg"
-                  alt=""
-                />
-                <div class="text">Caption Text</div>
+                <div class="slides-2">
+                  <div class="numbertext">5 / 5</div>
+                  <img
+                    src="https://cdn.pixabay.com/photo/2021/05/18/10/22/sheep-6262928_960_720.jpg"
+                    alt=""
+                  />
+                  <div class="text">Caption Text</div>
+                </div>
               </div>
             </div>
 
-            <a class="prev" onclick="moveslide(-1)">&#10094;</a>
-            <a class="next" onclick="moveslide(1)">&#10095;</a>
+            <a class="prev" onclick="moveSlide(-1)">&#10094;</a>
+            <a class="next" onclick="moveSlide(1)">&#10095;</a>
           </div>
           <br />
 
           <div class="dot-box">
-            <span class="dot-2" onclick="selectSlide(1)"></span>
-            <span class="dot-2" onclick="selectSlide(2)"></span>
-            <span class="dot-2" onclick="selectSlide(3)"></span>
-            <span class="dot-2" onclick="selectSlide(4)"></span>
-            <span class="dot-2" onclick="selectSlide(5)"></span>
+            <span class="dot-2" onclick="setSlide(1)"></span>
+            <span class="dot-2" onclick="setSlide(2)"></span>
+            <span class="dot-2" onclick="setSlide(3)"></span>
+            <span class="dot-2" onclick="setSlide(4)"></span>
+            <span class="dot-2" onclick="setSlide(5)"></span>
           </div>
         </section>
       </div>

@@ -33,7 +33,6 @@ section {
   background-color: #aaa;
   position: relative;
   @extend %slide-frame;
-  overflow: hidden;
 }
 
 .slides {
@@ -140,13 +139,19 @@ section {
 
 .slides-chain {
   position: absolute;
-  display: grid;
-  grid-template-columns: repeat(5, 100%);
+  display: flex;
   transition: transform 0.5s ease;
+  width: 500%;
 }
 
 .text-center {
   text-align: center;
+}
+
+.carousel {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
 }
 
 @keyframes fade {
@@ -156,4 +161,29 @@ section {
   to {
     opacity: 1;
   }
+}
+
+// infinite carousel styles
+.infinite-container {
+  @extend .container;
+  display: flex;
+  min-height: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column wrap;
+}
+
+.infinite-carousel {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  display: flex;
+  background-color: teal;
+  overflow: hidden;
+}
+
+.infinite-slide {
+  position: absolute;
+  display: flex;
+  width: 500%;
 }

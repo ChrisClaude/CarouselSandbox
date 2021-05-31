@@ -31,17 +31,68 @@ function showSlides(n) {
 }
 
 // second slide with scrolling animation
-var slideNumber = 1;
+let slideNumber = 1;
+let direction = 1;
+const slidesChainHtml = document.querySelector('.slides-chain');
+const slides2 = document.querySelectorAll('.slides-2');
+const carousel = document.querySelector('.carousel');
 
-function moveslide(n) {
-  const slidesChainHtml = document.querySelector('.slides-chain');
-  slideNumber += n;
-  const xCoordinate = (slideNumber - 1) * 100;
-  slidesChainHtml.style.transform = `translate(-${xCoordinate}%)`;
+// setSlide(slideNumber);
+
+function setSlide(n) {
+  const dotsHtml = document.querySelectorAll('.dot-2');
+  slideNumber = n;
+  const xCoordinate = -(direction * 20);
+  slidesChainHtml.style.transform = `translate(${xCoordinate}%)`;
+
   console.log(slideNumber);
+
+  // selecting dots
+  for (i = 0; i < dotsHtml.length; i++) {
+    dotsHtml[i].className = dotsHtml[i].className.replace(' active', '');
+  }
+
+  dotsHtml[slideNumber - 1].className += ' active';
 }
 
-function selectSlide(n) {
-  slideNumber = 2 * n;
-  moveslide(-1 * n);
+function moveSlide(n) {
+  if (n === 1) {
+    carousel.style.justifyContent = 'flex-start';
+    direction = 1;
+
+    // setting the silde number
+    if (slideNumber === slides2.length) {
+      setSlide(1);
+      return;
+    }
+  } else if (n === -1) {
+    carousel.style.justifyContent = 'flex-end';
+    direction = -1;
+
+    // setting the silde number
+    if (slideNumber === 1) {
+      setSlide(5);
+      return;
+    }
+  }
+
+  setSlide((slideNumber += n));
 }
+
+slidesChainHtml.addEventListener('transitionend', function () {
+  if (direction === 1) {
+    slidesChainHtml.append(slidesChainHtml.firstElementChild);
+  } else {
+    slidesChainHtml.prepend(slidesChainHtml.lastElementChild);
+  }
+
+  // we set the transition to none because the following transform should not transition
+  slidesChainHtml.style.transition = 'none';
+  slidesChainHtml.style.transform = 'translate(0)';
+
+  // we reset the transition
+  setTimeout(() => {
+    slidesChainHtml.style.transition = 'transform 0.5s ease';
+  });
+  console.log(direction);
+});
