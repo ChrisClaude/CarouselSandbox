@@ -62,71 +62,132 @@
         <a class="prev">&#10094;</a>
         <a class="next">&#10095;</a>
       </div>
+
+      <div class="dot-box" style="margin-top: 15px">
+        <span class="dot-2 active" onclick="setSlide(1)"></span>
+        <span class="dot-2" onclick="setSlide(2)"></span>
+        <span class="dot-2" onclick="setSlide(3)"></span>
+        <span class="dot-2" onclick="setSlide(4)"></span>
+        <span class="dot-2" onclick="setSlide(5)"></span>
+      </div>
     </div>
 
     <script>
-      showSlide();
+      let currentSlide = 1;
+      let initialSlideOrder;
+      let infiniteSlide;
+      let slideIterateInt;
+
+      // initialise slide after page loads
+      setTimeout(function () {
+        initialSlideOrder = document.querySelectorAll('.slides-2');
+        infiniteSlide = document.querySelector('.infinite-slide');
+        showSlide();
+      });
 
       function showSlide() {
-        let currentSlide = 1;
         let direction = -1;
-        const infiniteSldie = document.querySelector('.infinite-slide');
         const nextBtn = document.querySelector('.next');
         const prevBtn = document.querySelector('.prev');
         const MAX_SLIDE_NUM = document.querySelectorAll('.slides-2').length;
         const MIN_SLIDE_NUM = 1;
 
         // initial carousel set up
-        infiniteSldie.prepend(infiniteSldie.lastElementChild);
-        infiniteSldie.style.transform = 'translate(-500px)';
+        infiniteSlide.prepend(infiniteSlide.lastElementChild);
+        infiniteSlide.style.transform = 'translate(-500px)';
         setTimeout(function () {
-          infiniteSldie.style.transition = 'transform 0.5s ease';
+          infiniteSlide.style.transition = 'transform 0.5s ease-out';
         });
 
-        // Next and Prev button slinners
-        nextBtn.addEventListener('click', function () {
-          currentSlide =
-            currentSlide === MAX_SLIDE_NUM ? MIN_SLIDE_NUM : currentSlide + 1;
-          direction = -1;
-          infiniteSldie.style.transform = 'translate(-1000px)';
-
-          console.log(currentSlide);
-        });
-
-        prevBtn.addEventListener('click', function () {
-          currentSlide =
-            currentSlide === MIN_SLIDE_NUM ? MAX_SLIDE_NUM : currentSlide - 1;
-          direction = 1;
-          infiniteSldie.style.transform = 'translate(0)';
-
-          console.log(currentSlide);
-        });
-
-        infiniteSldie.addEventListener('transitionend', function () {
+        // Transition starts : we anticipate the end result of the transition with a temporal dot active state
+        infiniteSlide.addEventListener('transitionstart', function () {
+          let anticipateSlideNumber;
           if (direction === -1) {
-            infiniteSldie.append(infiniteSldie.firstElementChild);
+            anticipateSlideNumber =
+              currentSlide === MAX_SLIDE_NUM ? MIN_SLIDE_NUM : currentSlide + 1;
           } else {
-            infiniteSldie.prepend(infiniteSldie.lastElementChild);
+            anticipateSlideNumber =
+              currentSlide === MIN_SLIDE_NUM ? MAX_SLIDE_NUM : currentSlide - 1;
           }
+          // anticipate that the transition will end
+          setSlideDotActive(anticipateSlideNumber);
+        });
+
+        // Transition ends
+        infiniteSlide.addEventListener('transitionend', function () {
+          if (direction === -1) {
+            infiniteSlide.append(infiniteSlide.firstElementChild);
+            currentSlide =
+              currentSlide === MAX_SLIDE_NUM ? MIN_SLIDE_NUM : currentSlide + 1;
+          } else {
+            infiniteSlide.prepend(infiniteSlide.lastElementChild);
+            currentSlide =
+              currentSlide === MIN_SLIDE_NUM ? MAX_SLIDE_NUM : currentSlide - 1;
+          }
+          setSlideDotActive(currentSlide);
 
           // we set the transition to none because the following transform should not transition
-          infiniteSldie.style.transition = 'none';
-          infiniteSldie.style.transform = 'translate(-500px)';
+          infiniteSlide.style.transition = 'none';
+          infiniteSlide.style.transform = 'translate(-500px)';
 
           // we reset the transition
           setTimeout(() => {
-            infiniteSldie.style.transition = 'transform 0.9s ease';
+            infiniteSlide.style.transition = 'transform 0.9s ease-out';
           });
         });
 
-        setInterval(function () {
-          currentSlide =
-            currentSlide === MAX_SLIDE_NUM ? MIN_SLIDE_NUM : currentSlide + 1;
+        slideIterateInt = setInterval(function () {
           direction = -1;
-          infiniteSldie.style.transform = 'translate(-1000px)';
+          infiniteSlide.style.transform = 'translate(-1000px)';
+        }, 7000);
 
-          console.log(currentSlide);
-        }, 4000);
+        // Next and Prev button
+        nextBtn.addEventListener('click', function () {
+          direction = -1;
+          infiniteSlide.style.transform = 'translate(-1000px)';
+        });
+
+        prevBtn.addEventListener('click', function () {
+          direction = 1;
+          infiniteSlide.style.transform = 'translate(0)';
+        });
+      }
+
+      function setSlide(n) {
+        currentSlide = n;
+        // empty the circular carousel so we can give it the initialOrder of slides
+        infiniteSlide.innerHTML = '';
+        infiniteSlide.append(...initialSlideOrder);
+
+        // stop setInterval
+        clearInterval(slideIterateInt);
+
+        if (n === 1) {
+          infiniteSlide.prepend(infiniteSlide.lastElementChild);
+          return;
+        }
+
+        if (n === 2) {
+          return;
+        }
+
+        let shiftIndex = n - 2;
+
+        for (let index = 0; index < shiftIndex; index++) {
+          infiniteSlide.append(infiniteSlide.firstElementChild);
+        }
+
+        setSlideDotActive(currentSlide);
+      }
+
+      function setSlideDotActive(n) {
+        const dotsNodesList = document.querySelectorAll('.dot-2');
+
+        for (let index = 0; index < dotsNodesList.length; index++) {
+          dotsNodesList[index].className = 'dot-2';
+        }
+
+        dotsNodesList[n - 1].className = 'dot-2 active';
       }
     </script>
   </body>
